@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from '../styles/components/Countdown.module.css';
 
-const Countdown = () => {
-  // 25 min em segundos
-  const [time, setTime] = useState(25 * 60);
+let countdownTimeout: NodeJS.Timeout;
 
-  const [active, setActive] = useState(false);
+import Play from '../../public/icons/play.svg';
+import Close from '../../public/icons/close.svg'
+import Check from '../../public/icons/check.svg';
+import ChallengesContext from '../contexts/ChallengesContext';
+
+const Countdown = () => {
+
+  const {startNewChallenge} = useContext(ChallengesContext);
+
+
+  // 25 min em segundos
+  const [time, setTime] = useState(0.1 * 60);
+  const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished] = useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
+
 
   // 25 vira '25' que vira '2' '5'
   // 5 vira '5' que vira '05' devido ao padstart e vira '0' '5'
@@ -16,18 +28,34 @@ const Countdown = () => {
 
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
-    function startCountdown() {
-        setActive(true);
+  // Inciando countdown
+  function startCountdown() {
+    setIsActive(true);
+  }
+
+  function resetCountdown() {
+    // Usamos o clearTimeout para evitar o bug de um segundo, que se nao usarmos quando pararmos o countdown ele ainda contará + 1 segundo
+    clearTimeout(countdownTimeout);
+
+    // Parando countdown
+    setIsActive(false);
+
+    //Voltamos o countdown para 25 minutos
+    setTime(0.1 * 60);
+  }
+
+  // diminui um do countdown todo vez que o isActive e o time mudar, entao enquanto o isActive for true e time irá mudar
+  useEffect(() => {
+    if (isActive && time > 0) {
+      countdownTimeout = setTimeout(() => {
+        setTime(time - 1);
+      }, 1000);
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
+      startNewChallenge();
     }
-    
-    useEffect(() => {
-          if (active && time > 0) {
-            setTimeout(() => {
-              setTime(time - 1);
-            }, 1000);
-          }
-        
-    }, [active, time])
+  }, [isActive, time]);
 
   return (
     <div>
@@ -43,13 +71,34 @@ const Countdown = () => {
         </div>
       </div>
 
-      <button
-        type="button"
-        className={styles.countdownButton}
-        onClick={startCountdown}
-      >
-        Iniciar um ciclo
-      </button>
+      {hasFinished ? (
+        <button disabled className={styles.countdownButton}>
+          Ciclo encerrado
+          <Check/>
+        </button>
+      ) : (
+        <>
+          {isActive ? (
+            <button
+              type="button"
+              className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+              onClick={resetCountdown}
+            >
+              Abandonar ciclo
+              <Close />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={styles.countdownButton}
+              onClick={startCountdown}
+            >
+                  Iniciar um ciclo
+                  <Play/>
+            </button>
+          )}{' '}
+        </>
+      )}
     </div>
   );
 };
