@@ -6,12 +6,13 @@ import styles from '../styles/components/CompletedChallenges.module.css';
 
 const CompletedChallenges = () => {
 
-  const {challengesCompleted } = useContext(ChallengesContext);
+  const { challengesCompleted } = useContext(ChallengesContext);
+  
 
   return (
     <div className={styles.completedChallengesContainer}>
       <span>Desafios Completos</span>
-      <span>{challengesCompleted}</span>
+      <span>{Number(challengesCompleted)}</span>
     </div>
   );
 };
