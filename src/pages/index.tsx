@@ -4,6 +4,12 @@ import Countdown from '../components/Countdown';
 import ExperienceBar from '../components/ExperienceBar';
 import Profile from '../components/Profile';
 
+
+import GlobalStyle from '../styles/Global'
+import { ThemeProvider } from 'styled-components';
+import useTheme from '../hooks/useTheme';
+
+
 import { CountdownProvider } from '../contexts/CountdownContext';
 
 import styles from '../styles/pages/Home.module.css';
@@ -11,6 +17,13 @@ import styles from '../styles/pages/Home.module.css';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
+import { useState } from 'react';
+
+
+import DayNightToggle from 'react-day-and-night-toggle';
+
+
+
 
 interface HomeProps {
   level: number;
@@ -18,35 +31,53 @@ interface HomeProps {
   challengesCompleted: number;
 }
 
+
 export default function Home(props: HomeProps) {
 
+  // DARK/LIGHT MODE
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+
+
+
   return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-        <ExperienceBar />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <ChallengesProvider
+        level={props.level}
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}
+      >
+        <div className={styles.container}>
+          <Head>
+            <title>Início | move.it</title>
+          </Head>
+          <ExperienceBar />
 
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile
+                  setIsDarkMode={setIsDarkMode}
+                  toggleTheme={toggleTheme}
+                  isDarkMode={isDarkMode}
+                />
 
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
+ 
+
+                <CompletedChallenges />
+                <Countdown />
+              </div>
+
+              <div>
+                <ChallengeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
+      </ChallengesProvider>
+    </ThemeProvider>
   );
 }
 
