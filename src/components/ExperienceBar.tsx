@@ -14,7 +14,7 @@ const ExperienceBar = () => {
       <div>
         <div style={{ width: `${percentToNextLevel}%` }}>
           <span className={styles.currentExperience} style={{ left: `${percentToNextLevel}%` }}>
-            {currentExperience} xp
+            {Number(currentExperience)} xp
           </span>
         </div>
       </div>

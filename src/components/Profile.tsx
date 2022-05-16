@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import ChallengesContext from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
+import Cookies from 'js-cookie';
 
 import DayNightToggle from 'react-day-and-night-toggle';
 
 const Profile = ({ setIsDarkMode, toggleTheme, isDarkMode }) => {
   const { level } = useContext(ChallengesContext);
+
+
 
   return (
     <div className={styles.profileContainer}>

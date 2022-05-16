@@ -20,7 +20,6 @@ import { ChallengesProvider } from '../contexts/ChallengesContext';
 import { useState } from 'react';
 
 
-import DayNightToggle from 'react-day-and-night-toggle';
 
 
 
@@ -35,10 +34,7 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
 
   // DARK/LIGHT MODE
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-
-
+    const { theme, toggleTheme, setIsDarkModeState, isDarkModeState } = useTheme();
 
 
   return (
@@ -59,12 +55,10 @@ export default function Home(props: HomeProps) {
             <section>
               <div>
                 <Profile
-                  setIsDarkMode={setIsDarkMode}
+                  setIsDarkMode={setIsDarkModeState}
                   toggleTheme={toggleTheme}
-                  isDarkMode={isDarkMode}
+                  isDarkMode={isDarkModeState}
                 />
-
- 
 
                 <CompletedChallenges />
                 <Countdown />
