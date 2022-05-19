@@ -6,6 +6,7 @@ import styles from '../styles/components/CompletedChallenges.module.css';
 
 const CompletedChallenges = () => {
 
+
   const { challengesCompleted } = useContext(ChallengesContext);
   
 

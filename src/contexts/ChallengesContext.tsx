@@ -116,6 +116,8 @@ export const ChallengesProvider = ({
     setChallengesCompleted(challengesCompleted + 1);
   }
 
+  console.log(level, currentExperience, challengesCompleted);
+
   return (
     <ChallengesContext.Provider
       value={{
