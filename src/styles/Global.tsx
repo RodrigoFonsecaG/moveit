@@ -7,4 +7,7 @@ export default createGlobalStyle`
   --text: ${(props) => props.theme.colors.text};
   --title: ${(props) => props.theme.colors.title}
 }
+
+
 `;
+

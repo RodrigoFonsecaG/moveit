@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap');
 
 * {
   margin: 0;
@@ -7,6 +7,10 @@
 }
 
 :root {
+  --background: #f2f3f5;
+  --secondary: #fff;
+  --text: #666666;
+  --title: #2e384d;
   --gray-line: #dcdde0;
   --text-highlight: #b3b9ff;
   --red: #e83f5b;
@@ -65,6 +69,8 @@ body {
 
 button {
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
 a {
