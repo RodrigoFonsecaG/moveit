@@ -1,10 +1,10 @@
 import Cookies from 'js-cookie';
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
-import dark from '../styles/themes/dark';
-import light from '../styles/themes/light';
+import {dark} from '../styles/themes/dark';
+import {light} from '../styles/themes/light';
 
 interface ThemeContextData {
-  theme: object;
+  theme: Theme;
   toggleTheme: (isDarkMode: boolean) => void;
   isDarkModeState: boolean;
   setIsDarkModeState: Dispatch<SetStateAction<boolean>>;
@@ -12,6 +12,18 @@ interface ThemeContextData {
 
 interface ThemeProviderProps {
   children: ReactNode;
+}
+
+interface Theme {
+  title: string;
+  colors: Colors;
+}
+
+interface Colors {
+  background: string;
+  secondary: string;
+  text: string;
+  title: string;
 }
 
 export const ThemeModeContext = createContext({} as ThemeContextData);

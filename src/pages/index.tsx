@@ -6,6 +6,8 @@ import Challenges from '../components/Challenges';
 import { useContext } from 'react';
 import { ThemeModeContext } from '../contexts/ThemeModeContext';
 
+import { light } from '../styles/themes/light';
+import { dark } from '../styles/themes/dark';
 
 export default function Home(props) {
   const { theme } = useContext(ThemeModeContext);
@@ -13,7 +15,7 @@ export default function Home(props) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <Challenges {...props} />
+      <Challenges {...props} />
     </ThemeProvider>
   );
 }
