@@ -1,13 +1,14 @@
 import '../styles/global.css';
-
-import { ChallengesProvider } from '../contexts/ChallengesContext';
 import { ThemeModeProvider } from '../contexts/ThemeModeContext';
+import {SessionProvider} from "next-auth/react"
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {session, ...pageProps} }) {
   return (
-    <ThemeModeProvider>
-      <Component {...pageProps} />
-    </ThemeModeProvider>
+    <SessionProvider session={session}>
+      <ThemeModeProvider>
+        <Component {...pageProps} />
+      </ThemeModeProvider>
+    </SessionProvider>
   );
 }
 
