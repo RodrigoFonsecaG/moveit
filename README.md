@@ -6,6 +6,8 @@
 
 O site possui sistema de experiência e level que evoluem de acordo com a realização de desafios pelo usuario.
 
+https://moveit-pearl-pi.vercel.app/
+
 Futuras implementações:
 -
 -
