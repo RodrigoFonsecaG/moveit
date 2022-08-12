@@ -7,11 +7,6 @@
 O site possui sistema de experiência e level que evoluem de acordo com a realização de desafios pelo usuario.
 
 
-Futuras implementações:
--
--
--
-
 ---------
 
 ## 🖥️ Demonstração
